@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "psr-4": {
+            "Zenify\\NetteDatabaseFilters\\": "src"
+        }
+    },
     "require": {
         "nette/database": "^2.3"
     }
