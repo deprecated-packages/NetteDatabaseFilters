@@ -17,15 +17,15 @@ $pdo = $connection->getPdo();
 
 // 1. create table user + fill some data
 $pdo->prepare('CREATE TABLE user (name VARCHAR);')
-    ->execute();
+	->execute();
 $pdo->prepare('INSERT INTO user VALUES ("Tom");')
-    ->execute();
+	->execute();
 
 // 3. get data
 $users = $db->table('user')
-    ->fetchAll();
+	->fetchAll();
 
 // 4. render data
 foreach ($users as $user) {
-    echo "My name is: " . $user->name . PHP_EOL;
+	echo "My name is: " . $user->name . PHP_EOL;
 }

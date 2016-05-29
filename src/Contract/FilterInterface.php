@@ -1,16 +1,21 @@
 <?php
 
+/**
+ * This file is part of Zenify
+ * Copyright (c) 2016 Tomas Votruba (http://tomasvotruba.cz)
+ */
+
 namespace Zenify\NetteDatabaseFilters\Contract;
 
-
 use Nette\Database\Table\Selection;
+
 
 interface FilterInterface
 {
 
-    /**
-     * @return Selection
-     */
-    public function applyFilter(Selection $selection);
+	/**
+	 * @return Selection
+	 */
+	function applyFilter(Selection $selection);
 
 }

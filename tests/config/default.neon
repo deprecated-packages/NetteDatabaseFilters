@@ -1,0 +1,10 @@
+database:
+    dsn: "sqlite::memory:"
+
+
+services:
+    - Zenify\NetteDatabaseFilters\Tests\Filter\DummyFilter
+
+
+extensions:
+    - Zenify\NetteDatabaseFilters\DI\NetteDatabaseFiltersExtension
