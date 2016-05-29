@@ -1,0 +1,42 @@
+<?php
+
+namespace Zenify\NetteDatabaseFilters\Tests\DI;
+
+use Nette\Database\Context;
+use Nette\DI\Container;
+use PHPUnit_Framework_Assert;
+use PHPUnit_Framework_TestCase;
+use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
+use Zenify\NetteDatabaseFilters\Database\SmartContext;
+use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
+
+
+final class NetteDatabaseFiltersExtensionTest extends PHPUnit_Framework_TestCase
+{
+
+	/**
+	 * @var Container
+	 */
+	private $container;
+
+
+	protected function setUp()
+	{
+		$this->container = (new ContainerFactory)->create();
+	}
+
+
+	public function testContextWasReplaced()
+	{
+		$databaseContext = $this->container->getByType(Context::class);
+		$this->assertInstanceOf(SmartContext::class, $databaseContext);
+	}
+
+
+	public function testFiltersAreCollected()
+	{
+		$filterManager = $this->container->getByType(FilterManagerInterface::class);
+		$this->assertCount(1, PHPUnit_Framework_Assert::getObjectAttribute($filterManager, 'filters'));
+	}
+
+}

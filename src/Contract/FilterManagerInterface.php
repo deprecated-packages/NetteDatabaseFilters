@@ -1,14 +1,19 @@
 <?php
 
+/**
+ * This file is part of Zenify
+ * Copyright (c) 2016 Tomas Votruba (http://tomasvotruba.cz)
+ */
+
 namespace Zenify\NetteDatabaseFilters\Contract;
 
 
 interface FilterManagerInterface
 {
 
-    /**
-     * Adds filter.
-     */
-    public function addFilter(FilterInterface $filter);
+	/**
+	 * Adds filter.
+	 */
+	function addFilter(FilterInterface $filter);
 
 }

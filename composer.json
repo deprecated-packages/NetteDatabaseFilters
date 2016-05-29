@@ -1,10 +1,30 @@
 {
+    "name": "zenify/nette-database-filters",
+    "description": "Integration of Filters concept to Nette\\Database.",
+    "license": "MIT",
+    "authors": [
+        { "name": "Tomáš Votruba", "homepage": "http://tomasvotruba.cz" }
+    ],
     "autoload": {
         "psr-4": {
             "Zenify\\NetteDatabaseFilters\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Zenify\\NetteDatabaseFilters\\Tests\\": "tests"
+        }
+    },
     "require": {
-        "nette/database": "^2.3"
+        "php": "^5.6|^7.0",
+        "nette/database": "^2.3",
+        "nette/di": "^2.3"
+    },
+    "require-dev": {
+        "zenify/coding-standard": "^3.3",
+        "phpunit/phpunit": "^5.3",
+        "nette/utils": "^2.3",
+        "nette/bootstrap": "^2.3",
+        "tracy/tracy": "^2.3"
     }
 }
