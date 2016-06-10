@@ -33,11 +33,11 @@ final class ContainerFactory
 		$pdo = $connection->getPdo();
 
 		// 1. create table user + fill some data
-		$pdo->prepare('CREATE TABLE user (name VARCHAR);')
+		$pdo->prepare('CREATE TABLE user (id NOT NULL, name VARCHAR, PRIMARY KEY (id));')
 			->execute();
-		$pdo->prepare('INSERT INTO user VALUES ("Tom");')
+		$pdo->prepare('INSERT INTO user VALUES (1, "Tom");')
 			->execute();
-		$pdo->prepare('INSERT INTO user VALUES ("John");')
+		$pdo->prepare('INSERT INTO user VALUES (2, "John");')
 			->execute();
 	}
 

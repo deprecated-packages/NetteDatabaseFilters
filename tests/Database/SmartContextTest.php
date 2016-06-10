@@ -3,9 +3,7 @@
 namespace Zenify\NetteDatabaseFilters\Tests\Database;
 
 use Nette\Database\Context;
-use Nette\Database\Table\Selection;
-use Nette\DI\Container;
-use PHPUnit_Framework_Assert;
+use Nette\Database\Table\ActiveRow;
 use PHPUnit_Framework_TestCase;
 use Zenify\NetteDatabaseFilters\Database\Table\SmartSelection;
 use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
@@ -15,29 +13,33 @@ final class SmartContextTest extends PHPUnit_Framework_TestCase
 {
 
 	/**
-	 * @var Container
+	 * @var Context
 	 */
-	private $container;
+	private $database;
 
 
 	protected function setUp()
 	{
-		$this->container = (new ContainerFactory)->create();
+		$container = (new ContainerFactory)->create();
+		$this->database = $container->getByType(Context::class);
 	}
 
 
-	public function testApplyFilterFetch()
+	public function testFetchAll()
 	{
-		/** @var Context $database */
-		$database = $this->container->getByType(Context::class);
-
-		$selection = $database->table('user');
+		$selection = $this->database->table('user');
 		$this->assertInstanceOf(SmartSelection::class, $selection);
 
-//		$result = $database->table('user')
-//			->fetchAll();
+		$result = $selection->fetchAll();
+		$this->assertCount(1, $result);
+	}
 
-//		$this->assertCount(1, $result);
+
+	public function testFetch()
+	{
+		$selection = $this->database->table('user');
+		$this->assertInstanceOf(ActiveRow::class, $selection->get(1));
+		$this->assertFalse($selection->get(2));
 	}
 
 }
