@@ -42,4 +42,13 @@ final class SmartContextTest extends PHPUnit_Framework_TestCase
 		$this->assertFalse($selection->get(2));
 	}
 
+
+	public function fetchPairs()
+	{
+		$selection = $this->database->table('user');
+		$pairedNames = $selection->fetchPairs('name');
+
+		$this->assertCount(1, $pairedNames);
+	}
+
 }
