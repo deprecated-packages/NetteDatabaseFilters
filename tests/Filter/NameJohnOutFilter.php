@@ -18,7 +18,7 @@ final class NameJohnOutFilter implements FilterInterface
 
 		if ($tableName !== 'user') {
 		    return $selection;
-        }
+		}
 		$selection->where('name != ?', 'John');
 
 		return $selection;
