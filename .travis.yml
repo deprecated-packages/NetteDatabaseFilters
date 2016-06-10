@@ -15,7 +15,7 @@ before_script:
   - . vendor/ci/travis/static-analysis.sh
 
 script:
-  - vendor/bin/phpphpunit $PHPUNIT_FLAGS
+  - vendor/bin/phpunit $PHPUNIT_FLAGS
 
 after_script:
   - . vendor/ci/travis/coverage-send.sh
