@@ -4,7 +4,7 @@ database:
 
 services:
     - Zenify\NetteDatabaseFilters\Tests\Filter\DummyFilter
-
+    - Zenify\NetteDatabaseFilters\Tests\Filter\NameJohnOutFilter
 
 extensions:
     - Zenify\NetteDatabaseFilters\DI\NetteDatabaseFiltersExtension
