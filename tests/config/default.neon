@@ -1,4 +1,5 @@
 database:
+    # copied from https://github.com/nette/examples/blob/master/CD-collection/app/model/demo.db3
     dsn: "sqlite:%appDir%/data/database.db3"
 
 services:
