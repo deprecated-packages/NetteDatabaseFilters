@@ -23,7 +23,7 @@ final class SmartSelectionTest extends TestCase
 
 		/** @var Context $database */
 		$database = $container->getByType(Context::class);
-		$this->selection = $database->table('albums');
+		$this->selection = $database->table('comment');
 	}
 
 

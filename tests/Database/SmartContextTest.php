@@ -24,7 +24,7 @@ final class SmartContextTest extends PHPUnit_Framework_TestCase
 
 		/** @var Context $database */
 		$database = $container->getByType(Context::class);
-		$this->selection = $database->table('albums');
+		$this->selection = $database->table('comment');
 	}
 
 
@@ -34,58 +34,57 @@ final class SmartContextTest extends PHPUnit_Framework_TestCase
 
 		$result = $this->selection->fetchAll();
 
-		$this->assertCount(1, $result);
+		$this->assertCount(50, $result);
 	}
+
 
 	public function testGet()
 	{
-		$this->assertInstanceOf(ActiveRow::class, $this->selection->get(1));
-		$this->assertFalse($this->selection->get(2));
+		$this->assertInstanceOf(ActiveRow::class, $this->selection->get(2));
+		$this->assertFalse($this->selection->get(1));
 	}
 
 
 	public function testFetchPairs()
 	{
-		$pairs = $this->selection->fetchPairs('id', 'artist');
+		$pairs = $this->selection->fetchPairs('id', 'name');
 
-		$this->assertCount(1, $pairs);
-		$this->assertSame([
-			1 => 'Suzanne Vega'
-		], $pairs);
+		$this->assertCount(50, $pairs);
 	}
 
 
 	public function testFetchIteration()
 	{
 		$userCount = 0;
-		foreach ($this->selection as $user) {
+		foreach ($this->selection as $comment) {
 			$userCount++;
 		}
-		$this->assertSame(1, $userCount);
+		$this->assertSame(50, $userCount);
 	}
 
 
 	public function testFetch()
 	{
-		$user = $this->selection->fetch();
-		$this->assertInstanceOf(ActiveRow::class, $user);
-		$this->assertSame('Suzanne Vega', $user['artist']);
+		for ($i = 0; $i < 50; $i++) {
+			$comment = $this->selection->fetch();
+			$this->assertInstanceOf(ActiveRow::class, $comment);
+		}
 
-		$user2 = $this->selection->fetch();
-		$this->assertFalse($user2);
+		$commentOver = $this->selection->fetch();
+		$this->assertFalse($commentOver);
 	}
 
 
 	public function testCount()
 	{
-		$this->assertSame(1, $this->selection->count());
+		$this->assertSame(50, $this->selection->count());
 	}
 
 
 	public function testWhere()
 	{
-		$this->selection->where('artist != ?', 'Suzanne Vega');
-		$this->assertSame(0, $this->selection->count());
+		$this->selection->where('name != ?', 'Jan');
+		$this->assertSame(48, $this->selection->count());
 	}
 
 }

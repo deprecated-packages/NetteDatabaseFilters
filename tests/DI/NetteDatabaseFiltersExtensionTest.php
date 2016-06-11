@@ -36,7 +36,7 @@ final class NetteDatabaseFiltersExtensionTest extends PHPUnit_Framework_TestCase
 	public function testFiltersAreCollected()
 	{
 		$filterManager = $this->container->getByType(FilterManagerInterface::class);
-		$this->assertCount(2, PHPUnit_Framework_Assert::getObjectAttribute($filterManager, 'filters'));
+		$this->assertCount(1, PHPUnit_Framework_Assert::getObjectAttribute($filterManager, 'filters'));
 	}
 
 }
