@@ -6,7 +6,7 @@ use Nette\Database\Table\Selection;
 use Zenify\NetteDatabaseFilters\Contract\FilterInterface;
 
 
-final class NameJohnOutFilter implements FilterInterface
+final class IgnoreMobyFilter implements FilterInterface
 {
 
 	/**
@@ -16,10 +16,10 @@ final class NameJohnOutFilter implements FilterInterface
 	{
 		$tableName = $selection->getName();
 
-		if ($tableName !== 'user') {
+		if ($tableName !== 'albums') {
 		    return $selection;
 		}
-		$selection->where('name != ?', 'John');
+		$selection->where('artist != ?', 'Moby');
 
 		return $selection;
 	}

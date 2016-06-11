@@ -4,6 +4,7 @@ namespace Zenify\NetteDatabaseFilters\Tests\Database;
 
 use Nette\Database\Context;
 use Nette\Database\Table\ActiveRow;
+use Nette\Database\Table\Selection;
 use PHPUnit_Framework_TestCase;
 use Zenify\NetteDatabaseFilters\Database\Table\SmartSelection;
 use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
@@ -11,44 +12,80 @@ use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
 
 final class SmartContextTest extends PHPUnit_Framework_TestCase
 {
-
 	/**
-	 * @var Context
+	 * @var Selection
 	 */
-	private $database;
+	private $selection;
 
 
 	protected function setUp()
 	{
 		$container = (new ContainerFactory)->create();
-		$this->database = $container->getByType(Context::class);
+
+		/** @var Context $database */
+		$database = $container->getByType(Context::class);
+		$this->selection = $database->table('albums');
 	}
 
 
 	public function testFetchAll()
 	{
-		$selection = $this->database->table('user');
-		$this->assertInstanceOf(SmartSelection::class, $selection);
+		$this->assertInstanceOf(SmartSelection::class, $this->selection);
 
-		$result = $selection->fetchAll();
+		$result = $this->selection->fetchAll();
+
 		$this->assertCount(1, $result);
+	}
+
+	public function testGet()
+	{
+		$this->assertInstanceOf(ActiveRow::class, $this->selection->get(1));
+		$this->assertFalse($this->selection->get(2));
+	}
+
+
+	public function testFetchPairs()
+	{
+		$pairs = $this->selection->fetchPairs('id', 'artist');
+
+		$this->assertCount(1, $pairs);
+		$this->assertSame([
+			1 => 'Suzanne Vega'
+		], $pairs);
+	}
+
+
+	public function testFetchIteration()
+	{
+		$userCount = 0;
+		foreach ($this->selection as $user) {
+			$userCount++;
+		}
+		$this->assertSame(1, $userCount);
 	}
 
 
 	public function testFetch()
 	{
-		$selection = $this->database->table('user');
-		$this->assertInstanceOf(ActiveRow::class, $selection->get(1));
-		$this->assertFalse($selection->get(2));
+		$user = $this->selection->fetch();
+		$this->assertInstanceOf(ActiveRow::class, $user);
+		$this->assertSame('Suzanne Vega', $user['artist']);
+
+		$user2 = $this->selection->fetch();
+		$this->assertFalse($user2);
 	}
 
 
-	public function fetchPairs()
+	public function testCount()
 	{
-		$selection = $this->database->table('user');
-		$pairedNames = $selection->fetchPairs('name');
+		$this->assertSame(1, $this->selection->count());
+	}
 
-		$this->assertCount(1, $pairedNames);
+
+	public function testWhere()
+	{
+		$this->selection->where('artist != ?', 'Suzanne Vega');
+		$this->assertSame(0, $this->selection->count());
 	}
 
 }

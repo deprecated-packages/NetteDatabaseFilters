@@ -1,10 +1,9 @@
 database:
-    dsn: "sqlite::memory:"
-
+    dsn: "sqlite:%appDir%/data/database.db3"
 
 services:
     - Zenify\NetteDatabaseFilters\Tests\Filter\DummyFilter
-    - Zenify\NetteDatabaseFilters\Tests\Filter\NameJohnOutFilter
+    - Zenify\NetteDatabaseFilters\Tests\Filter\IgnoreMobyFilter
 
 extensions:
     - Zenify\NetteDatabaseFilters\DI\NetteDatabaseFiltersExtension
