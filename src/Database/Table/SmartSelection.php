@@ -7,11 +7,48 @@
 
 namespace Zenify\NetteDatabaseFilters\Database\Table;
 
+use Nette\Caching\IStorage;
+use Nette\Database\Context;
+use Nette\Database\IConventions;
+use Nette\Database\Table\GroupedSelection;
 use Nette\Database\Table\Selection;
 use Zenify\NetteDatabaseFilters\Contract\Database\Table\SelectionInterface;
+use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
 
 
 final class SmartSelection extends Selection implements SelectionInterface
 {
+
+	/**
+	 * @var FilterManagerInterface
+	 */
+	private $filterManager;
+
+
+	public function __construct(
+		FilterManagerInterface $filterManager,
+		Context $context,
+		IConventions $conventions,
+		$tableName,
+		IStorage $cacheStorage = NULL
+	) {
+		$this->filterManager = $filterManager;
+		parent::__construct($context, $conventions, $tableName, $cacheStorage);
+	}
+
+	/**
+	 * @param string $table
+	 * @param string $column
+	 * @param int $active key
+	 * @return GroupedSelection
+	 */
+	public function getReferencingTable($table, $column, $active = NULL)
+	{
+		$referencingTable = parent::getReferencingTable($table, $column, $active);
+		
+		$this->filterManager->applyFilters($referencingTable);
+
+		return $referencingTable;
+	}
 
 }

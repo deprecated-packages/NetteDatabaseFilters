@@ -14,6 +14,7 @@ use Nette\Database\IConventions;
 use Nette\Database\IStructure;
 use Zenify\NetteDatabaseFilters\Contract\Database\ContextInterface;
 use Zenify\NetteDatabaseFilters\Database\Table\SmartSelection;
+use Zenify\NetteDatabaseFilters\Database\Table\SmartSelectionFactory;
 use Zenify\NetteDatabaseFilters\FilterManager;
 
 
@@ -49,7 +50,7 @@ final class SmartContext extends Context implements ContextInterface
 	 */
 	public function table($table)
 	{
-		$selection = new SmartSelection($this, $this->getConventions(), $table, $this->cacheStorage);
+		$selection = new SmartSelection($this->filterManager, $this, $this->getConventions(), $table, $this->cacheStorage);
 
 		$this->filterManager->applyFilters($selection);
 
