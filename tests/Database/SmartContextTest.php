@@ -12,6 +12,7 @@ use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
 
 final class SmartContextTest extends PHPUnit_Framework_TestCase
 {
+
 	/**
 	 * @var Selection
 	 */
