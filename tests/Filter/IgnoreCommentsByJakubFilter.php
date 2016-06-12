@@ -15,13 +15,11 @@ final class IgnoreCommentsByJakubFilter implements FilterInterface
 	public function applyFilter(Selection $selection)
 	{
 		$tableName = $selection->getName();
-
 		if ($tableName !== 'comment') {
-		    return $selection;
+		    return;
 		}
-		$selection->where('name != ?', 'Jakub');
 
-		return $selection;
+		$selection->where('name != ?', 'Jakub');
 	}
 
 }

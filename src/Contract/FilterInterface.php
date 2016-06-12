@@ -13,9 +13,6 @@ use Nette\Database\Table\Selection;
 interface FilterInterface
 {
 
-	/**
-	 * @return Selection
-	 */
 	function applyFilter(Selection $selection);
 
 }
