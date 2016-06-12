@@ -7,6 +7,8 @@
 
 namespace Zenify\NetteDatabaseFilters\Contract;
 
+use Nette\Database\Table\Selection;
+
 
 interface FilterManagerInterface
 {
@@ -15,5 +17,11 @@ interface FilterManagerInterface
 	 * Adds filter.
 	 */
 	function addFilter(FilterInterface $filter);
+
+
+	/**
+	 * @return Selection
+	 */
+	function applyFilters(Selection $selection);
 
 }

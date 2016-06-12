@@ -3,11 +3,10 @@
 namespace Zenify\NetteDatabaseFilters\Tests\Database;
 
 use Nette\Database\Context;
-use Nette\DI\Container;
-use PHPUnit_Framework_Assert;
+use Nette\Database\Table\ActiveRow;
+use Nette\Database\Table\Selection;
 use PHPUnit_Framework_TestCase;
-use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
-use Zenify\NetteDatabaseFilters\Database\SmartContext;
+use Zenify\NetteDatabaseFilters\Database\Table\SmartSelection;
 use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
 
 
@@ -15,25 +14,78 @@ final class SmartContextTest extends PHPUnit_Framework_TestCase
 {
 
 	/**
-	 * @var Container
+	 * @var Selection
 	 */
-	private $container;
+	private $selection;
 
 
 	protected function setUp()
 	{
-		$this->container = (new ContainerFactory)->create();
+		$container = (new ContainerFactory)->create();
+
+		/** @var Context $database */
+		$database = $container->getByType(Context::class);
+		$this->selection = $database->table('comment');
 	}
 
 
-	public function testApplyFilterFetch()
+	public function testFetchAll()
 	{
-		/** @var Context $database */
-		$database = $this->container->getByType(Context::class);
+		$this->assertInstanceOf(SmartSelection::class, $this->selection);
 
-		$database->table('user')
-			->fetchAll();
-		// ...
+		$result = $this->selection->fetchAll();
+
+		$this->assertCount(50, $result);
+	}
+
+
+	public function testGet()
+	{
+		$this->assertInstanceOf(ActiveRow::class, $this->selection->get(2));
+		$this->assertFalse($this->selection->get(1));
+	}
+
+
+	public function testFetchPairs()
+	{
+		$pairs = $this->selection->fetchPairs('id', 'name');
+
+		$this->assertCount(50, $pairs);
+	}
+
+
+	public function testFetchIteration()
+	{
+		$userCount = 0;
+		foreach ($this->selection as $comment) {
+			$userCount++;
+		}
+		$this->assertSame(50, $userCount);
+	}
+
+
+	public function testFetch()
+	{
+		for ($i = 0; $i < 50; $i++) {
+			$comment = $this->selection->fetch();
+			$this->assertInstanceOf(ActiveRow::class, $comment);
+		}
+
+		$commentOver = $this->selection->fetch();
+		$this->assertFalse($commentOver);
+	}
+
+
+	public function testCount()
+	{
+		$this->assertSame(50, $this->selection->count());
+	}
+
+
+	public function testWhere()
+	{
+		$this->selection->where('name != ?', 'Jan');
+		$this->assertSame(48, $this->selection->count());
 	}
 
 }

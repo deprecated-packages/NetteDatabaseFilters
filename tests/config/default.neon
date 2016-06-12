@@ -1,10 +1,9 @@
 database:
-    dsn: "sqlite::memory:"
-
+    # copied from https://github.com/nette/examples/blob/master/Micro-blog/www/data/blog.db3
+    dsn: "sqlite:%appDir%/data/blog.db3"
 
 services:
-    - Zenify\NetteDatabaseFilters\Tests\Filter\DummyFilter
-
+    - Zenify\NetteDatabaseFilters\Tests\Filter\IgnoreCommentsByJakubFilter
 
 extensions:
     - Zenify\NetteDatabaseFilters\DI\NetteDatabaseFiltersExtension

@@ -31,7 +31,7 @@ final class FilterManager implements FilterManagerInterface
 
 
 	/**
-	 * @return Selection
+	 * {@inheritdoc}
 	 */
 	public function applyFilters(Selection $selection)
 	{

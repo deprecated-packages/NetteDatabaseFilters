@@ -6,7 +6,7 @@ use Nette\Database\Table\Selection;
 use Zenify\NetteDatabaseFilters\Contract\FilterInterface;
 
 
-final class DummyFilter implements FilterInterface
+final class IgnoreCommentsByJakubFilter implements FilterInterface
 {
 
 	/**
@@ -14,6 +14,12 @@ final class DummyFilter implements FilterInterface
 	 */
 	public function applyFilter(Selection $selection)
 	{
+		$tableName = $selection->getName();
+		if ($tableName !== 'comment') {
+		    return;
+		}
+
+		$selection->where('name != ?', 'Jakub');
 	}
 
 }
