@@ -45,10 +45,7 @@ final class SmartSelection extends Selection implements SelectionInterface
 
 
 	/**
-	 * @param string $table
-	 * @param string $column
-	 * @param int $active key
-	 * @return GroupedSelection
+	 * {@inheritdoc}
 	 */
 	public function getReferencingTable($table, $column, $active = NULL)
 	{
@@ -57,6 +54,19 @@ final class SmartSelection extends Selection implements SelectionInterface
 		$this->filterManager->applyFilters($referencingTable);
 
 		return $referencingTable;
+	}
+
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function createSelectionInstance($table = NULL)
+	{
+		$selection = parent::createSelectionInstance($table);
+
+		$this->filterManager->applyFilters($selection);
+
+		return $selection;
 	}
 
 }
