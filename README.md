@@ -100,8 +100,8 @@ final class SoftdeletableFilter implements FilterInterface
      */
     public function applyFilter(Selection $selection)
     {
-        // 1. allow only admin
-        if (!$this->user->isLoggedIn() || !$this->user->hasRole('admin')) {
+        // 1. skip filter for admin user
+        if ($this->user->isLoggedIn() && $this->user->hasRole('admin')) {
             return;
         }
 
