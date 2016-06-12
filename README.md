@@ -15,7 +15,7 @@ Port of Filters concept to Nette\Database.
 Via Composer:
 
 ```sh
-$ composer require zenify/nette-database-filters
+composer require zenify/nette-database-filters
 ```
 
 Register extensions you need in `config.neon`:
