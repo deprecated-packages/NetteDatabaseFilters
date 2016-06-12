@@ -32,6 +32,8 @@ final class NetteDatabaseFiltersExtensionMultipleContextTest extends PHPUnit_Fra
 			$databaseContextService = $this->container->getService($databaseContextServiceName);
 			$this->assertInstanceOf(SmartContext::class, $databaseContextService);
 		}
+
+		$this->assertCount(2, $this->container->findByType(Context::class));
 	}
 
 
@@ -39,7 +41,7 @@ final class NetteDatabaseFiltersExtensionMultipleContextTest extends PHPUnit_Fra
 	{
 		foreach ($this->container->findByType(SmartContext::class) as $databaseContextServiceName) {
 			$databaseContextService = $this->container->getService($databaseContextServiceName);
-			
+
 			$this->assertInstanceOf(
 				FilterManagerInterface::class,
 				PHPUnit_Framework_Assert::getObjectAttribute($databaseContextService, 'filterManager')
