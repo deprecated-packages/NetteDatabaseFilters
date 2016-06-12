@@ -7,7 +7,6 @@
 
 namespace Zenify\NetteDatabaseFilters\Contract;
 
-
 use Nette\Database\Table\Selection;
 
 

@@ -25,6 +25,13 @@ final class SmartSelection extends Selection implements SelectionInterface
 	private $filterManager;
 
 
+	/**
+	 * @param FilterManagerInterface $filterManager
+	 * @param Context $context
+	 * @param IConventions $conventions
+	 * @param string $tableName
+	 * @param IStorage|NULL $cacheStorage
+	 */
 	public function __construct(
 		FilterManagerInterface $filterManager,
 		Context $context,
@@ -36,6 +43,7 @@ final class SmartSelection extends Selection implements SelectionInterface
 		parent::__construct($context, $conventions, $tableName, $cacheStorage);
 	}
 
+
 	/**
 	 * @param string $table
 	 * @param string $column
@@ -45,7 +53,7 @@ final class SmartSelection extends Selection implements SelectionInterface
 	public function getReferencingTable($table, $column, $active = NULL)
 	{
 		$referencingTable = parent::getReferencingTable($table, $column, $active);
-		
+
 		$this->filterManager->applyFilters($referencingTable);
 
 		return $referencingTable;
