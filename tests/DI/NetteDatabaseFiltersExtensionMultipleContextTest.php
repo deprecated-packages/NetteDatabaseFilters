@@ -22,7 +22,7 @@ final class NetteDatabaseFiltersExtensionMultipleContextTest extends PHPUnit_Fra
 
 	protected function setUp()
 	{
-		$this->container = (new ContainerFactory)->createWithConfig(__DIR__.'/../config/multiple-context.neon');
+		$this->container = (new ContainerFactory)->createWithConfig(__DIR__ . '/../config/multiple-context.neon');
 	}
 
 
