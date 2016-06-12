@@ -40,10 +40,6 @@ final class SmartSelectionTest extends TestCase
 		$comment = $this->database->table('comment')
 			->get(31);
 
-		/**
-		 * This article should not be available thanks to
-		 * @see IgnoreArticleWithId9Filter
-		 */
 		$article = $comment->ref('article');
 		$this->assertNull($article);
 	}
