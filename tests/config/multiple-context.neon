@@ -1,0 +1,8 @@
+database:
+    one:
+        dsn: "sqlite:%appDir%/data/blog.db3"
+    two:
+        dsn: ""
+
+extensions:
+    - Zenify\NetteDatabaseFilters\DI\NetteDatabaseFiltersExtension

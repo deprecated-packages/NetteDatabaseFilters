@@ -36,27 +36,35 @@ final class NetteDatabaseFiltersExtension extends CompilerExtension
 	public function beforeCompile()
 	{
 		$this->replaceContextWithOwnClass();
+		$this->setFilterManagerToContexts();
 		$this->collectFiltersToFilterManager();
 	}
 
 
 	public function replaceContextWithOwnClass()
 	{
-		$containerBuilder = $this->getContainerBuilder();
-
-		foreach ($containerBuilder->findByType(Context::class) as $contextDefinition) {
+		foreach ($this->getContainerBuilder()->findByType(Context::class) as $contextDefinition) {
 			$contextDefinition->setFactory(SmartContext::class);
-			$contextDefinition->setAutowired(TRUE);
+		}
+	}
+
+
+	private function setFilterManagerToContexts()
+	{
+		$filterManagerDefinition = $this->getDefinitionByType(FilterManagerInterface::class);
+
+		foreach ($this->getContainerBuilder()->findByType(Context::class) as $contextDefinition) {
+			$contextDefinition->setFactory(SmartContext::class);
+			$contextDefinition->addSetup('setFilterManager', ['@' . $filterManagerDefinition->getClass()]);
 		}
 	}
 
 
 	private function collectFiltersToFilterManager()
 	{
-		$containerBuilder = $this->getContainerBuilder();
-
 		$filterManagerDefinition = $this->getDefinitionByType(FilterManagerInterface::class);
-		foreach ($containerBuilder->findByType(FilterInterface::class) as $name => $definition) {
+
+		foreach ($this->getContainerBuilder()->findByType(FilterInterface::class) as $name => $definition) {
 			$filterManagerDefinition->addSetup('addFilter', ['@' . $name]);
 		}
 	}
@@ -68,10 +76,10 @@ final class NetteDatabaseFiltersExtension extends CompilerExtension
 	 */
 	private function getDefinitionByType($type)
 	{
-		$containerBuilder = $this->getContainerBuilder();
-		$serviceName = $containerBuilder->getByType($type);
+		$definitionsByType = $this->getContainerBuilder()
+			->findByType($type);
 
-		return $containerBuilder->getDefinition($serviceName);
+		return array_pop($definitionsByType);
 	}
 
 }
