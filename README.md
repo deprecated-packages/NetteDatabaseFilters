@@ -19,7 +19,7 @@ composer require zenify/nette-database-filters
 And register extension:
 
 ```yaml
-// app/config/config.neon
+# app/config/config.neon
 extensions:
 	- Zenify\NetteDatabaseFilters\DI\NetteDatabaseFiltersExtension
 ```
