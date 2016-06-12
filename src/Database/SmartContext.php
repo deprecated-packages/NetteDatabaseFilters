@@ -13,8 +13,8 @@ use Nette\Database\Context;
 use Nette\Database\IConventions;
 use Nette\Database\IStructure;
 use Zenify\NetteDatabaseFilters\Contract\Database\ContextInterface;
+use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
 use Zenify\NetteDatabaseFilters\Database\Table\SmartSelection;
-use Zenify\NetteDatabaseFilters\Database\Table\SmartSelectionFactory;
 use Zenify\NetteDatabaseFilters\FilterManager;
 
 
@@ -33,15 +33,19 @@ final class SmartContext extends Context implements ContextInterface
 
 
 	public function __construct(
-		FilterManager $filterManager,
 		Connection $connection,
 		IStructure $structure,
 		IConventions $conventions = NULL,
 		IStorage $cacheStorage = NULL
 	) {
 		parent::__construct($connection, $structure, $conventions, $cacheStorage);
-		$this->filterManager = $filterManager;
 		$this->cacheStorage = $cacheStorage;
+	}
+
+
+	public function setFilterManager(FilterManagerInterface $filterManager)
+	{
+		$this->filterManager = $filterManager;
 	}
 
 

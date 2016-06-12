@@ -1,0 +1,10 @@
+database:
+    one:
+        # copied from https://github.com/nette/examples/blob/master/Micro-blog/www/data/blog.db3
+        dsn: "sqlite:%appDir%/data/blog.db3"
+    two:
+        # copied from https://github.com/nette/examples/blob/master/Micro-blog/www/data/blog.db3
+        dsn: "sqlite:%appDir%/data/blog.db3"
+
+extensions:
+    - Zenify\NetteDatabaseFilters\DI\NetteDatabaseFiltersExtension
