@@ -10,13 +10,11 @@ namespace Zenify\NetteDatabaseFilters\Database\Table;
 use Nette\Caching\IStorage;
 use Nette\Database\Context;
 use Nette\Database\IConventions;
-use Nette\Database\Table\GroupedSelection;
 use Nette\Database\Table\Selection;
-use Zenify\NetteDatabaseFilters\Contract\Database\Table\SelectionInterface;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
 
 
-final class SmartSelection extends Selection implements SelectionInterface
+final class SmartSelection extends Selection
 {
 
 	/**

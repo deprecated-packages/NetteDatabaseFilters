@@ -12,13 +12,12 @@ use Nette\Database\Connection;
 use Nette\Database\Context;
 use Nette\Database\IConventions;
 use Nette\Database\IStructure;
-use Zenify\NetteDatabaseFilters\Contract\Database\ContextInterface;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
 use Zenify\NetteDatabaseFilters\Database\Table\SmartSelection;
 use Zenify\NetteDatabaseFilters\FilterManager;
 
 
-final class SmartContext extends Context implements ContextInterface
+final class SmartContext extends Context
 {
 
 	/**
@@ -50,7 +49,8 @@ final class SmartContext extends Context implements ContextInterface
 
 
 	/**
-	 * {@inheritdoc}
+	 * @param string $table
+	 * @return SmartSelection
 	 */
 	public function table($table)
 	{
