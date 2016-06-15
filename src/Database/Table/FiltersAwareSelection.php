@@ -14,7 +14,7 @@ use Nette\Database\Table\Selection;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
 
 
-final class SmartSelection extends Selection
+final class FiltersAwareSelection extends Selection
 {
 
 	/**

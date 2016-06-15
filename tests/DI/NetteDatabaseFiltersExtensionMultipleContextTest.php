@@ -7,7 +7,7 @@ use Nette\DI\Container;
 use PHPUnit_Framework_Assert;
 use PHPUnit_Framework_TestCase;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
-use Zenify\NetteDatabaseFilters\Database\SmartContext;
+use Zenify\NetteDatabaseFilters\Database\FiltersAwareContext;
 use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
 
 
@@ -30,7 +30,7 @@ final class NetteDatabaseFiltersExtensionMultipleContextTest extends PHPUnit_Fra
 	{
 		foreach ($this->container->findByType(Context::class) as $databaseContextServiceName) {
 			$databaseContextService = $this->container->getService($databaseContextServiceName);
-			$this->assertInstanceOf(SmartContext::class, $databaseContextService);
+			$this->assertInstanceOf(FiltersAwareContext::class, $databaseContextService);
 		}
 
 		$this->assertCount(2, $this->container->findByType(Context::class));
@@ -39,7 +39,7 @@ final class NetteDatabaseFiltersExtensionMultipleContextTest extends PHPUnit_Fra
 
 	public function testFilterManagerWasSet()
 	{
-		foreach ($this->container->findByType(SmartContext::class) as $databaseContextServiceName) {
+		foreach ($this->container->findByType(FiltersAwareContext::class) as $databaseContextServiceName) {
 			$databaseContextService = $this->container->getService($databaseContextServiceName);
 
 			$this->assertInstanceOf(
