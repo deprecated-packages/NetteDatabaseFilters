@@ -9,7 +9,7 @@ use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
 use Zenify\NetteDatabaseFilters\Tests\Filter\IgnoreArticleWithId9Filter;
 
 
-final class SmartSelectionTest extends TestCase
+final class FiltersAwareSelectionTest extends TestCase
 {
 
 	/**

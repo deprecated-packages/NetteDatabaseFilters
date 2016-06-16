@@ -12,7 +12,7 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\ServiceDefinition;
 use Zenify\NetteDatabaseFilters\Contract\FilterInterface;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
-use Zenify\NetteDatabaseFilters\Database\SmartContext;
+use Zenify\NetteDatabaseFilters\Database\FiltersAwareContext;
 
 
 final class NetteDatabaseFiltersExtension extends CompilerExtension
@@ -44,7 +44,7 @@ final class NetteDatabaseFiltersExtension extends CompilerExtension
 	public function replaceContextWithOwnClass()
 	{
 		foreach ($this->getContainerBuilder()->findByType(Context::class) as $contextDefinition) {
-			$contextDefinition->setFactory(SmartContext::class);
+			$contextDefinition->setFactory(FiltersAwareContext::class);
 		}
 	}
 
@@ -54,7 +54,7 @@ final class NetteDatabaseFiltersExtension extends CompilerExtension
 		$filterManagerDefinition = $this->getDefinitionByType(FilterManagerInterface::class);
 
 		foreach ($this->getContainerBuilder()->findByType(Context::class) as $contextDefinition) {
-			$contextDefinition->setFactory(SmartContext::class);
+			$contextDefinition->setFactory(FiltersAwareContext::class);
 			$contextDefinition->addSetup('setFilterManager', ['@' . $filterManagerDefinition->getClass()]);
 		}
 	}

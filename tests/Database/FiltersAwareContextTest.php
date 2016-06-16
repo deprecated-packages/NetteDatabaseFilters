@@ -6,11 +6,11 @@ use Nette\Database\Context;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 use PHPUnit_Framework_TestCase;
-use Zenify\NetteDatabaseFilters\Database\Table\SmartSelection;
+use Zenify\NetteDatabaseFilters\Database\Table\FiltersAwareSelection;
 use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
 
 
-final class SmartContextTest extends PHPUnit_Framework_TestCase
+final class FiltersAwareContextTest extends PHPUnit_Framework_TestCase
 {
 
 	/**
@@ -31,7 +31,7 @@ final class SmartContextTest extends PHPUnit_Framework_TestCase
 
 	public function testFetchAll()
 	{
-		$this->assertInstanceOf(SmartSelection::class, $this->selection);
+		$this->assertInstanceOf(FiltersAwareSelection::class, $this->selection);
 
 		$result = $this->selection->fetchAll();
 

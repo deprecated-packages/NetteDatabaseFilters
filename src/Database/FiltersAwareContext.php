@@ -13,11 +13,11 @@ use Nette\Database\Context;
 use Nette\Database\IConventions;
 use Nette\Database\IStructure;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
-use Zenify\NetteDatabaseFilters\Database\Table\SmartSelection;
+use Zenify\NetteDatabaseFilters\Database\Table\FiltersAwareSelection;
 use Zenify\NetteDatabaseFilters\FilterManager;
 
 
-final class SmartContext extends Context
+final class FiltersAwareContext extends Context
 {
 
 	/**
@@ -50,11 +50,17 @@ final class SmartContext extends Context
 
 	/**
 	 * @param string $table
-	 * @return SmartSelection
+	 * @return FiltersAwareSelection
 	 */
 	public function table($table)
 	{
-		$selection = new SmartSelection($this->filterManager, $this, $this->getConventions(), $table, $this->cacheStorage);
+		$selection = new FiltersAwareSelection(
+			$this->filterManager,
+			$this,
+			$this->getConventions(),
+			$table,
+			$this->cacheStorage
+		);
 
 		$this->filterManager->applyFilters($selection);
 
