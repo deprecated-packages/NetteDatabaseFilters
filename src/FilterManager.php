@@ -33,10 +33,10 @@ final class FilterManager implements FilterManagerInterface
 	/**
 	 * {@inheritdoc}
 	 */
-	public function applyFilters(Selection $selection)
+	public function applyFilters(Selection $selection, $targetTable)
 	{
 		foreach ($this->filters as $filter) {
-			$filter->applyFilter($selection);
+			$filter->applyFilter($selection, $targetTable);
 		}
 
 		return $selection;

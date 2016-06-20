@@ -62,7 +62,7 @@ final class FiltersAwareContext extends Context
 			$this->cacheStorage
 		);
 
-		$this->filterManager->applyFilters($selection);
+		$this->filterManager->applyFilters($selection, $selection->getName());
 
 		return $selection;
 	}

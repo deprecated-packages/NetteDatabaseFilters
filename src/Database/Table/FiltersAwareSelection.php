@@ -49,7 +49,7 @@ final class FiltersAwareSelection extends Selection
 	{
 		$referencingTable = parent::getReferencingTable($table, $column, $active);
 
-		$this->filterManager->applyFilters($referencingTable);
+		$this->filterManager->applyFilters($referencingTable, $referencingTable->getName());
 
 		return $referencingTable;
 	}
@@ -62,7 +62,7 @@ final class FiltersAwareSelection extends Selection
 	{
 		$selection = parent::createSelectionInstance($table);
 
-		$this->filterManager->applyFilters($selection);
+		$this->filterManager->applyFilters($selection, $selection->getName());
 
 		return $selection;
 	}
