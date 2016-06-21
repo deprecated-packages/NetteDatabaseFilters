@@ -12,10 +12,9 @@ final class IgnoreCommentsByJakubFilter implements FilterInterface
 	/**
 	 * {@inheritdoc}
 	 */
-	public function applyFilter(Selection $selection)
+	public function applyFilter(Selection $selection, $targetTable)
 	{
-		$tableName = $selection->getName();
-		if ($tableName !== 'comment') {
+		if ($targetTable !== 'comment') {
 		    return;
 		}
 

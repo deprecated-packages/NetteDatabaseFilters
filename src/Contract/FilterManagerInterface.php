@@ -20,8 +20,10 @@ interface FilterManagerInterface
 
 
 	/**
+	 * @param Selection $selection
+	 * @param string $targetTable
 	 * @return Selection
 	 */
-	function applyFilters(Selection $selection);
+	function applyFilters(Selection $selection, $targetTable);
 
 }

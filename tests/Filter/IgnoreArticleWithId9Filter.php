@@ -12,14 +12,13 @@ final class IgnoreArticleWithId9Filter implements FilterInterface
 	/**
 	 * {@inheritdoc}
 	 */
-	public function applyFilter(Selection $selection)
+	public function applyFilter(Selection $selection, $targetTable)
 	{
-		$tableName = $selection->getName();
-		if ($tableName !== 'article') {
+		if ($targetTable !== 'article') {
 		    return;
 		}
 
-		$selection->where('id != ?', 9);
+		$selection->where($targetTable . '.id != ?', 9);
 	}
 
 }
