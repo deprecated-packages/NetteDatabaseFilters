@@ -13,6 +13,7 @@ use Nette\DI\ServiceDefinition;
 use Zenify\NetteDatabaseFilters\Contract\FilterInterface;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
 use Zenify\NetteDatabaseFilters\Database\FiltersAwareContext;
+use Zenify\NetteDatabaseFilters\Sql\SqlParser;
 
 
 final class NetteDatabaseFiltersExtension extends CompilerExtension
@@ -56,6 +57,7 @@ final class NetteDatabaseFiltersExtension extends CompilerExtension
 		foreach ($this->getContainerBuilder()->findByType(Context::class) as $contextDefinition) {
 			$contextDefinition->setFactory(FiltersAwareContext::class);
 			$contextDefinition->addSetup('setFilterManager', ['@' . $filterManagerDefinition->getClass()]);
+			$contextDefinition->addSetup('setSqlParser', ['@' . SqlParser::class]);
 		}
 	}
 

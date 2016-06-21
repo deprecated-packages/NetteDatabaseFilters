@@ -3,10 +3,8 @@
 namespace Zenify\NetteDatabaseFilters\Tests\Database;
 
 use Nette\Database\Context;
-use Nette\Database\Table\ActiveRow;
 use PHPUnit\Framework\TestCase;
 use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
-use Zenify\NetteDatabaseFilters\Tests\Filter\IgnoreArticleWithId9Filter;
 
 
 final class FiltersAwareSelectionTest extends TestCase
@@ -42,6 +40,15 @@ final class FiltersAwareSelectionTest extends TestCase
 
 		$article = $comment->ref('article');
 		$this->assertNull($article);
+	}
+
+
+	public function testSelect()
+	{
+		$commentsOfAllUsers = $this->database->table('article')
+			->select(':comment.*');
+
+		$this->assertCount(47, $commentsOfAllUsers);
 	}
 
 }

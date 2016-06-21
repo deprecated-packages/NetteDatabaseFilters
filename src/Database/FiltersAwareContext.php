@@ -15,6 +15,7 @@ use Nette\Database\IStructure;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
 use Zenify\NetteDatabaseFilters\Database\Table\FiltersAwareSelection;
 use Zenify\NetteDatabaseFilters\FilterManager;
+use Zenify\NetteDatabaseFilters\Sql\SqlParser;
 
 
 final class FiltersAwareContext extends Context
@@ -29,6 +30,11 @@ final class FiltersAwareContext extends Context
 	 * @var IStorage
 	 */
 	private $cacheStorage;
+
+	/**
+	 * @var SqlParser
+	 */
+	private $sqlParser;
 
 
 	public function __construct(
@@ -48,6 +54,12 @@ final class FiltersAwareContext extends Context
 	}
 
 
+	public function setSqlParser(SqlParser $sqlParser)
+	{
+		$this->sqlParser = $sqlParser;
+	}
+
+
 	/**
 	 * @param string $table
 	 * @return FiltersAwareSelection
@@ -56,6 +68,7 @@ final class FiltersAwareContext extends Context
 	{
 		$selection = new FiltersAwareSelection(
 			$this->filterManager,
+			$this->sqlParser,
 			$this,
 			$this->getConventions(),
 			$table,

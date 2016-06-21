@@ -11,7 +11,9 @@ use Nette\Caching\IStorage;
 use Nette\Database\Context;
 use Nette\Database\IConventions;
 use Nette\Database\Table\Selection;
+use PHPSQLParser\PHPSQLParser;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
+use Zenify\NetteDatabaseFilters\Sql\SqlParser;
 
 
 final class FiltersAwareSelection extends Selection
@@ -22,9 +24,15 @@ final class FiltersAwareSelection extends Selection
 	 */
 	private $filterManager;
 
+	/**
+	 * @var SqlParser
+	 */
+	private $sqlParser;
+
 
 	/**
 	 * @param FilterManagerInterface $filterManager
+	 * @param SqlParser $sqlParser
 	 * @param Context $context
 	 * @param IConventions $conventions
 	 * @param string $tableName
@@ -32,12 +40,14 @@ final class FiltersAwareSelection extends Selection
 	 */
 	public function __construct(
 		FilterManagerInterface $filterManager,
+		SqlParser $sqlParser,
 		Context $context,
 		IConventions $conventions,
 		$tableName,
 		IStorage $cacheStorage = NULL
 	) {
 		$this->filterManager = $filterManager;
+		$this->sqlParser = $sqlParser;
 		parent::__construct($context, $conventions, $tableName, $cacheStorage);
 	}
 
@@ -67,4 +77,21 @@ final class FiltersAwareSelection extends Selection
 		return $selection;
 	}
 
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function select($columns, ...$params)
+	{
+		$selection = parent::select($columns, ...$params);
+
+		$tables = $this->sqlParser->parseTablesFromSql($selection->getSql());
+		foreach ($tables as $table) {
+			$this->filterManager->applyFilters($selection, $table);
+		}
+
+		return $selection;
+	}
+
 }
+
