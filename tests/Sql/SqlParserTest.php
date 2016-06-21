@@ -18,14 +18,15 @@ final class SqlParserTest extends PHPUnit_Framework_TestCase
 
 	protected function setUp()
 	{
-		$this->sqlParser = new SqlParser(new PHPSQLParser());
+		$this->sqlParser = new SqlParser(new PHPSQLParser);
 	}
 
 
 	public function testParseTables()
 	{
 		$tables = $this->sqlParser->parseTablesFromSql(
-			'SELECT [comment].* FROM [article] LEFT JOIN [comment] ON [article].[id] = [comment].[article_id] WHERE ([article].[id] != ?)'
+			'SELECT [comment].* FROM [article] LEFT JOIN [comment] ON [article].[id] '
+			. '= [comment].[article_id] WHERE ([article].[id] != ?)'
 		);
 
 		$this->assertSame(['article', 'comment'], $tables);

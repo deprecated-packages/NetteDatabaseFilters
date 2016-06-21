@@ -21,9 +21,9 @@ final class SqlParser
 
 	public function __construct(PHPSQLParser $phpSqlParser)
 	{
-
 		$this->phpSqlParser = $phpSqlParser;
 	}
+
 
 	/**
 	 * @param string $sql
