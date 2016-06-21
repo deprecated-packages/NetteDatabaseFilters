@@ -18,7 +18,7 @@ final class IgnoreArticleWithId9Filter implements FilterInterface
 		    return;
 		}
 
-		$selection->where('article.id != ?', 9);
+		$selection->where($targetTable . '.id != ?', 9);
 	}
 
 }

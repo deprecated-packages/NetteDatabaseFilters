@@ -85,13 +85,18 @@ final class FiltersAwareSelection extends Selection
 	{
 		$selection = parent::select($columns, ...$params);
 
-		$tables = $this->sqlParser->parseTablesFromSql($selection->getSql());
-		foreach ($tables as $table) {
-			$this->filterManager->applyFilters($selection, $table);
-		}
+		$this->applyFilters($selection);
 
 		return $selection;
 	}
 
-}
 
+	private function applyFilters(Selection $selection)
+	{
+		$tables = $this->sqlParser->parseTablesFromSql($selection->getSql());
+		foreach ($tables as $table) {
+			$this->filterManager->applyFilters($selection, $table);
+		}
+	}
+
+}
