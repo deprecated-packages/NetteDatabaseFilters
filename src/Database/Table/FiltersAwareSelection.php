@@ -46,6 +46,11 @@ final class FiltersAwareSelection extends Selection
 	}
 
 
+	/**
+	 * @param string $table
+	 * @param string $column
+	 * @param int|NULL $active
+	 */
 	public function getReferencingTable($table, $column, $active = NULL) : GroupedSelection
 	{
 		$referencingTable = parent::getReferencingTable($table, $column, $active);
@@ -56,6 +61,9 @@ final class FiltersAwareSelection extends Selection
 	}
 
 
+	/**
+	 * @param string $table
+	 */
 	public function createSelectionInstance($table = NULL) : Selection
 	{
 		$selection = parent::createSelectionInstance($table);
