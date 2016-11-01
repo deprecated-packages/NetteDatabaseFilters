@@ -1,17 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zenify\NetteDatabaseFilters\Tests\DI;
 
 use Nette\Database\Context;
 use Nette\DI\Container;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_Assert;
-use PHPUnit_Framework_TestCase;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
 use Zenify\NetteDatabaseFilters\Database\FiltersAwareContext;
 use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
 
 
-final class NetteDatabaseFiltersExtensionTest extends PHPUnit_Framework_TestCase
+final class NetteDatabaseFiltersExtensionTest extends TestCase
 {
 
 	/**

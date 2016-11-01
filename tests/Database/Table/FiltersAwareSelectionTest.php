@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zenify\NetteDatabaseFilters\Tests\Database;
 
 use Nette\Database\Context;

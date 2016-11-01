@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2016 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -10,8 +12,8 @@ namespace Zenify\NetteDatabaseFilters\Database\Table;
 use Nette\Caching\IStorage;
 use Nette\Database\Context;
 use Nette\Database\IConventions;
+use Nette\Database\Table\GroupedSelection;
 use Nette\Database\Table\Selection;
-use PHPSQLParser\PHPSQLParser;
 use Zenify\NetteDatabaseFilters\Contract\FilterManagerInterface;
 use Zenify\NetteDatabaseFilters\Sql\SqlParser;
 
@@ -30,20 +32,12 @@ final class FiltersAwareSelection extends Selection
 	private $sqlParser;
 
 
-	/**
-	 * @param FilterManagerInterface $filterManager
-	 * @param SqlParser $sqlParser
-	 * @param Context $context
-	 * @param IConventions $conventions
-	 * @param string $tableName
-	 * @param IStorage|NULL $cacheStorage
-	 */
 	public function __construct(
 		FilterManagerInterface $filterManager,
 		SqlParser $sqlParser,
 		Context $context,
 		IConventions $conventions,
-		$tableName,
+		string $tableName,
 		IStorage $cacheStorage = NULL
 	) {
 		$this->filterManager = $filterManager;
@@ -52,10 +46,7 @@ final class FiltersAwareSelection extends Selection
 	}
 
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function getReferencingTable($table, $column, $active = NULL)
+	public function getReferencingTable($table, $column, $active = NULL) : GroupedSelection
 	{
 		$referencingTable = parent::getReferencingTable($table, $column, $active);
 
@@ -65,10 +56,7 @@ final class FiltersAwareSelection extends Selection
 	}
 
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function createSelectionInstance($table = NULL)
+	public function createSelectionInstance($table = NULL) : Selection
 	{
 		$selection = parent::createSelectionInstance($table);
 
@@ -79,9 +67,10 @@ final class FiltersAwareSelection extends Selection
 
 
 	/**
-	 * {@inheritdoc}
+	 * @param string $columns
+	 * @param array ...$params
 	 */
-	public function select($columns, ...$params)
+	public function select($columns, ...$params) : Selection
 	{
 		$selection = parent::select($columns, ...$params);
 
