@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zenify\NetteDatabaseFilters\Tests\Database;
 
 use Nette\Database\Context;
 use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Zenify\NetteDatabaseFilters\Database\Table\FiltersAwareSelection;
 use Zenify\NetteDatabaseFilters\Tests\ContainerFactory;
 
 
-final class FiltersAwareContextTest extends PHPUnit_Framework_TestCase
+final class FiltersAwareContextTest extends TestCase
 {
 
 	/**

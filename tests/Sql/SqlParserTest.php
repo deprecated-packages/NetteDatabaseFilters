@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Zenify\NetteDatabaseFilters\Tests\Sql;
 
 use PHPSQLParser\PHPSQLParser;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Zenify\NetteDatabaseFilters\Sql\SqlParser;
 
 
-final class SqlParserTest extends PHPUnit_Framework_TestCase
+final class SqlParserTest extends TestCase
 {
 
 	/**

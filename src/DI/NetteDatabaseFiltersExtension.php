@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2016 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -19,9 +21,6 @@ use Zenify\NetteDatabaseFilters\Sql\SqlParser;
 final class NetteDatabaseFiltersExtension extends CompilerExtension
 {
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function loadConfiguration()
 	{
 		$this->compiler->parseServices(
@@ -31,9 +30,6 @@ final class NetteDatabaseFiltersExtension extends CompilerExtension
 	}
 
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function beforeCompile()
 	{
 		$this->replaceContextWithOwnClass();
@@ -72,11 +68,7 @@ final class NetteDatabaseFiltersExtension extends CompilerExtension
 	}
 
 
-	/**
-	 * @param string $type
-	 * @return ServiceDefinition
-	 */
-	private function getDefinitionByType($type)
+	private function getDefinitionByType(string $type) : ServiceDefinition
 	{
 		$definitionsByType = $this->getContainerBuilder()
 			->findByType($type);

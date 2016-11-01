@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2016 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -13,17 +15,9 @@ use Nette\Database\Table\Selection;
 interface FilterManagerInterface
 {
 
-	/**
-	 * Adds filter.
-	 */
 	function addFilter(FilterInterface $filter);
 
 
-	/**
-	 * @param Selection $selection
-	 * @param string $targetTable
-	 * @return Selection
-	 */
-	function applyFilters(Selection $selection, $targetTable);
+	function applyFilters(Selection $selection, string $targetTable) : Selection;
 
 }

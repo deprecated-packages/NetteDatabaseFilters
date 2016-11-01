@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2016 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -21,19 +23,13 @@ final class FilterManager implements FilterManagerInterface
 	private $filters = [];
 
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function addFilter(FilterInterface $filter)
 	{
 		$this->filters[] = $filter;
 	}
 
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function applyFilters(Selection $selection, $targetTable)
+	public function applyFilters(Selection $selection, string $targetTable) : Selection
 	{
 		foreach ($this->filters as $filter) {
 			$filter->applyFilter($selection, $targetTable);

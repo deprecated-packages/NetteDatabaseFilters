@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2016 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -25,11 +27,7 @@ final class SqlParser
 	}
 
 
-	/**
-	 * @param string $sql
-	 * @return string[]
-	 */
-	public function parseTablesFromSql($sql)
+	public function parseTablesFromSql(string $sql) : array
 	{
 		$parsedSql = $this->phpSqlParser->parse($sql);
 

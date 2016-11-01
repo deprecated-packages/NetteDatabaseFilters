@@ -1,6 +1,8 @@
 <?php
 
-/**
+declare(strict_types=1);
+
+/*
  * This file is part of Zenify
  * Copyright (c) 2016 Tomas Votruba (http://tomasvotruba.cz)
  */
@@ -62,9 +64,8 @@ final class FiltersAwareContext extends Context
 
 	/**
 	 * @param string $table
-	 * @return FiltersAwareSelection
 	 */
-	public function table($table)
+	public function table($table) : FiltersAwareSelection
 	{
 		$selection = new FiltersAwareSelection(
 			$this->filterManager,

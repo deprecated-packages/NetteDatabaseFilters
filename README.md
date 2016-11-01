@@ -3,7 +3,6 @@
 [![Build Status](https://img.shields.io/travis/Zenify/NetteDatabaseFilters.svg?style=flat-square)](https://travis-ci.org/Zenify/NetteDatabaseFilters)
 [![Quality Score](https://img.shields.io/scrutinizer/g/Zenify/NetteDatabaseFilters.svg?style=flat-square)](https://scrutinizer-ci.com/g/Zenify/NetteDatabaseFilters)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Zenify/NetteDatabaseFilters.svg?style=flat-square)](https://scrutinizer-ci.com/g/Zenify/NetteDatabaseFilters)
-[![Downloads total](https://img.shields.io/packagist/dt/zenify/nette-database-filters.svg?style=flat-square)](https://packagist.org/packages/zenify/nette-database-filters)
 [![Latest stable](https://img.shields.io/packagist/v/zenify/nette-database-filters.svg?style=flat-square)](https://packagist.org/packages/zenify/nette-database-filters)
 
 
@@ -122,3 +121,24 @@ final class SoftdeletableFilter implements FilterInterface
 Simple, right? :)
 
 P.S.: Same can be done for Front/Admin presenters via `Nette\Application\Application` service.
+
+
+
+
+## Testing
+
+```sh
+composer check-cs
+vendor/bin/phpunit
+```
+
+
+## Contributing
+
+Rules are simple:
+
+- new feature needs tests
+- all tests must pass
+- 1 feature per PR
+
+We would be happy to merge your feature then!
