@@ -40,9 +40,6 @@ use Zenify\NetteDatabaseFilters\Contract\FilterInterface;
 final class SoftdeletableFilter implements FilterInterface
 {
 
-    /**
-     * {@inheritdoc}
-     */
     public function applyFilter(Selection $selection)
     {
         // 1. apply only to "comment" table
@@ -94,9 +91,6 @@ final class SoftdeletableFilter implements FilterInterface
     }
 
 
-    /**
-     * {@inheritdoc}
-     */
     public function applyFilter(Selection $selection)
     {
         // 1. skip filter for admin user
