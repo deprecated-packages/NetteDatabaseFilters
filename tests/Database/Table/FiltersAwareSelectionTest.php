@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Zenify\NetteDatabaseFilters\Tests\Database;
+namespace Zenify\NetteDatabaseFilters\Tests\Database\Table;
 
 use Nette\Database\Context;
 use PHPUnit\Framework\TestCase;
